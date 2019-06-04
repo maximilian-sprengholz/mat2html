@@ -2,7 +2,7 @@
 Stata .ado to export matrices as HTML tables
 
 ## Description
-This program exports tables stored as matrix to valid HTML tables.  Labeling and some tweaking/styling is possible, however, styling is assumed to be done via CSS classes assigned to the written HTML table.  Useful in dynamic documents where some table output styling is desired.
+This program exports tables stored as matrix to valid HTML tables.  Labeling and some tweaking/styling is possible, however, styling is assumed to be done via CSS classes assigned to the written HTML table.  Useful in dynamic documents where some table output styling is desired. For Stata V13.0 or greater.
 
 ## Installation
 ```Stata
