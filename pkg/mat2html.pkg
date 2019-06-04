@@ -1,5 +1,9 @@
 v 3
-d mat2html : export matrices as HTML tables
+d {cf: mat2html} : export matrices as HTML tables
 d Maximilian Sprengholz, Humboldt Universität zu Berlin
+d
+d Distribution-Date: 20190604
+d
+d Support: email maximilian.sprengholz@hu-berlin.de
 f mat2html.ado
 f mat2html.sthlp
