@@ -179,11 +179,11 @@ In the following example, one row would be inserted before the first row
 {cmd:addr(}0 3{cmd:)}, {cmd:addc(}2 2{cmd:)}
 
 {p 4 8 2}
-{cmd:Title(}{it:string}{cmd:)} adds a title above the table. The title is added as
-<caption style="display:none"> to prevent scrolling the caption out of the viewport
-when displaying large tables in the browser. However, a <p class="tabcap">Title<p>
-is added above the table instead, which you can style by class
-(and add "position: sticky" and, for example, "left:0" to your CSS).
+{cmd:Title(}{it:string}{cmd:)} adds a title above the table as <p class="tabcap">Title<p>,
+which you can style by class. You could, for example, to prevent the title scrolling
+out of the viewport when you scroll large tables add: p.tabcap "position: sticky; left:0" to your CSS.
+However, for accessibility, the title is also added as <caption style="display:none">Title</caption>
+(which will show up with deactivated CSS).
 
 {p 4 8 2}
 {cmd:Class()}{it:namelist}{cmd:)} adds a CSS class to the table.
