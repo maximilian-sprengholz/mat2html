@@ -46,17 +46,17 @@ mat2html M using "mytable.html", ///
 <tr><th></th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th></tr>
 </thead>
 <tbody>
-<tr><th>r1</th><td>0.845</td><td>0.726</td><td>0.302</td><td>0.871</td><td>0.558</td><td>0.984</td><td>0.914</td><td>0.837</td>
+<tr><th>b</th><td>0.145</td><td>0.370</td><td>0.257</td><td>0.155</td><td>0.870</td><td>0.709</td><td>0.439</td><td>0.324</td>
 </tr>
-<tr><th>r2</th><td>(0.756)</td><td>(0.243)</td><td>(0.846)</td><td>(0.479)</td><td>(0.557)</td><td>(0.772)</td><td>(0.516)</td><td>(0.332)</td>
+<tr><th>se</th><td>(0.895)</td><td>(0.978)</td><td>(0.802)</td><td>(0.349)</td><td>(0.488)</td><td>(0.609)</td><td>(0.724)</td><td>(0.565)</td>
 </tr>
-<tr><th>r3</th><td>3,000</td><td>6,000</td><td>9,000</td><td>12,000</td><td>15,000</td><td>18,000</td><td>21,000</td><td>24,000</td>
+<tr><th>N</th><td>3,000</td><td>6,000</td><td>9,000</td><td>12,000</td><td>15,000</td><td>18,000</td><td>21,000</td><td>24,000</td>
 </tr>
-<tr><th>r4</th><td>0.390</td><td>0.844</td><td>0.903</td><td>0.903</td><td>0.629</td><td>0.086</td><td>0.355</td><td>0.436</td>
+<tr><th>b</th><td>0.917</td><td>0.549</td><td>0.729</td><td>0.569</td><td>0.966</td><td>0.169</td><td>0.076</td><td>0.781</td>
 </tr>
-<tr><th>r5</th><td>(0.798)</td><td>(0.922)</td><td>(0.350)</td><td>(0.678)</td><td>(0.357)</td><td>(0.554)</td><td>(0.840)</td><td>(0.313)</td>
+<tr><th>se</th><td>(0.153)</td><td>(0.735)</td><td>(0.084)</td><td>(0.414)</td><td>(0.828)</td><td>(0.552)</td><td>(0.664)</td><td>(0.490)</td>
 </tr>
-<tr><th>r6</th><td>6,000</td><td>12,000</td><td>18,000</td><td>24,000</td><td>30,000</td><td>36,000</td><td>42,000</td><td>48,000</td>
+<tr><th>N</th><td>6,000</td><td>12,000</td><td>18,000</td><td>24,000</td><td>30,000</td><td>36,000</td><td>42,000</td><td>48,000</td>
 </tr>
 </tbody></table>
 <span class="legend">My table note</span>
