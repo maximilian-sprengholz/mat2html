@@ -42,7 +42,7 @@ working directory under "mat2html_{it:name}".
 {p2col:{cmd:ADDRows(}{it:numlist}{cmd:)}}Add empty rows to table{p_end}
 {p2col:{cmd:ADDCols(}{it:numlist}{cmd:)}}Add empty columns to table{p_end}
 {p2col:{cmd:Title(}{it:string}{cmd:)}}Add title to table{p_end}
-{p2col:{cmd:Class(}{it:namelist}{cmd:)}}Assign CSS classes to table{p_end}
+{p2col:{cmd:Class(}{it:str}{cmd:)}}Assign CSS classes to table{p_end}
 {p2col:{cmd:Note(}{it:string}{cmd:)}}Add note to table{p_end}
 {p2col:{cmd:PRETable(}{it:string}{cmd:)}}Add text/code to be printed before table code{p_end}
 {p2col:{cmd:POSTTable(}{it:string}{cmd:)}}Add text/code to be printed after table code{p_end}
@@ -192,7 +192,10 @@ However, classes cannot have spaces in HTML, so a valid class option might look
 like this:
 
 {p 8 8 2}
-{cmd: class(my-table-class1 my-table-class-2)}
+{cmd: class(my-table-class1 my-table-class-2)} ,
+
+{p 8 8 2}
+what will result in the opening tag <table class="my-table-class1 my-table-class2">.
 
 {p 8 8 2}
 When you use the option {cmd: rowtwolabels}, the table will aditionally have the
