@@ -75,7 +75,7 @@ There are several possibilities to combine written text and Stata output within 
 webdoc append "mytable.html"
 ```    
 
-Personally, I prefer to write Markdown/HTML and Stata code within editors like Atom providing syntax highlighting for multiple languages within a single file. You could, for example, use the package [markdown-preview-enhanced](https://github.com/shd101wyy/markdown-preview-enhanced) within Atom to include your HTML files at any place in the document, adding it tothe DOM via:
+Personally, I prefer to write Markdown/HTML and Stata code within editors like Atom providing syntax highlighting for multiple languages within a single file. You could, for example, use the package [markdown-preview-enhanced](https://github.com/shd101wyy/markdown-preview-enhanced) within Atom to include your HTML files at any place in the document, adding it to the DOM via:
 
 ```markdown
 @import "mytable.html"
