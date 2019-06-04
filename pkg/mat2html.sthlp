@@ -229,7 +229,7 @@ Default behavior is to replace the file.
 
    // example matrix
       {cmd:mat} M = matuniform(6,8)
-      {cmd:forvalues} c=1/8
+      {cmd:forvalues} c=1/8 {
         {cmd: foreach} r in 3 6 {
           {cmd: mat} M[`r',`c']=`c'*`r'*1000 // example N
         }
