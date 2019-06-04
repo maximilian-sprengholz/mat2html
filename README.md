@@ -82,7 +82,7 @@ Personally, I prefer to write Markdown/HTML and Stata code within editors like A
 ```
 
 ## Author
-Maximilian Sprengholz
-Humboldt-Universität zu Berlin
-[maximilian.sprengholz@hu-berlin.de](maximilian.sprengholz@hu-berlin.de)
+Maximilian Sprengholz<br />
+Humboldt-Universität zu Berlin<br />
+[maximilian.sprengholz@hu-berlin.de](mailto:maximilian.sprengholz@hu-berlin.de)
 
