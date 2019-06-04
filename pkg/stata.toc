@@ -1,0 +1,3 @@
+v 3
+d Maximilian Sprengholz, Humboldt Universität zu Berlin
+p mat2html : export matrices as HTML tables
