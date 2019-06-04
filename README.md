@@ -42,7 +42,7 @@ mat2html M using "mytable.html", ///
 ...creates the following table output (of course, the random cell contents will vary with reproduction):
 
 <p class="tabcap">My table title</p>
-<table class="my-example-class rowtwolabels"><caption style="display:none;">My table title</caption>
+<table class="my-example-class rowtwolabels"><caption style="display:none !important;">My table title</caption>
 
 <thead>
 <tr><th></th><th></th><th colspan="2">Model 1</th><th colspan="2">Model 2</th><th colspan="2">Model 3</th><th colspan="2">Model 4</th>
