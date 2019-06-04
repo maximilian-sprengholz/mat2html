@@ -1,0 +1,5 @@
+v 3
+d mat2html : export matrices as HTML tables
+d Maximilian Sprengholz, Humboldt Universität zu Berlin
+f mat2html.ado
+f mat2html.sthlp
