@@ -23,8 +23,7 @@ forvalues c=1/8
 
 // set labels/parentheses
 forvalues i=1/2 {
-  local rlabels = `" `rlabels' "Eq. 1" "Eq. 2""'
-  local r2labels = `" `r2labels' "b" "se" "N" "' // use double quotes within compound double quotes!
+  local rlabels = `" `rlabels' "b" "se" "N" "' // use double quotes within compound double quotes!
 }
 local rowno = rowsof(M)
 
@@ -32,35 +31,32 @@ local rowno = rowsof(M)
 mat2html M using "mytable.html", ///
     f(rowm, flist(3 %9.0gc) panel (3)) /// every third row (N) formatted as %9.0gc
     par(par, rows(2(3)`rowno')) /// enclose every second row (se) in parentheses
-    rowl(`rlabels') rowspan(3) /// add row labels and span
-    rowtwol(`r2labels') /// 2nd set
+    rowl(`r2labels') /// add row labels
     coll("Model 1" "Model 2" "Model 3" "Model 4") colspan(2) /// add first set of col labels
     coltwol("Subpop1" "Subpop2" "Subpop1" "Subpop2" "Subpop1" "Subpop2" "Subpop1" "Subpop2") /// 2nd set
-    title("My table title") class(my-example-class) /// you can see the class when looking at the HTML code
+    class(my-example-class) /// you can see the class when looking at the HTML code
     note("My table note")
 ```
-...creates the following table output (of course, the random cell contents will vary with reproduction):
+...creates the following table output of `mytable.html` (of course, the random cell contents will vary with reproduction):
 
-<p class="tabcap">My table title</p>
-<table class="my-example-class rowtwolabels"><caption style="display:none !important;">My table title</caption>
-
+<table class="my-example-class">
 <thead>
-<tr><th></th><th></th><th colspan="2">Model 1</th><th colspan="2">Model 2</th><th colspan="2">Model 3</th><th colspan="2">Model 4</th>
+<tr><th></th><th colspan="2">Model 1</th><th colspan="2">Model 2</th><th colspan="2">Model 3</th><th colspan="2">Model 4</th>
 </tr>
-<tr><th></th><th></th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th></tr>
+<tr><th></th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th><th>Subpop1</th><th>Subpop2</th></tr>
 </thead>
 <tbody>
-<tr><th rowspan="3">Eq. 1</th><th>b</th><td>0.988</td><td>0.237</td><td>0.224</td><td>0.816</td><td>0.485</td><td>0.834</td><td>0.142</td><td>0.969</td>
+<tr><th>r1</th><td>0.845</td><td>0.726</td><td>0.302</td><td>0.871</td><td>0.558</td><td>0.984</td><td>0.914</td><td>0.837</td>
 </tr>
-<tr><th style="display:none"></th><th>se</th><td>(0.159)</td><td>(0.797)</td><td>(0.730)</td><td>(0.223)</td><td>(0.063)</td><td>(0.308)</td><td>(0.814)</td><td>(0.226)</td>
+<tr><th>r2</th><td>(0.756)</td><td>(0.243)</td><td>(0.846)</td><td>(0.479)</td><td>(0.557)</td><td>(0.772)</td><td>(0.516)</td><td>(0.332)</td>
 </tr>
-<tr><th style="display:none"></th><th>N</th><td>3,000</td><td>6,000</td><td>9,000</td><td>12,000</td><td>15,000</td><td>18,000</td><td>21,000</td><td>24,000</td>
+<tr><th>r3</th><td>3,000</td><td>6,000</td><td>9,000</td><td>12,000</td><td>15,000</td><td>18,000</td><td>21,000</td><td>24,000</td>
 </tr>
-<tr><th rowspan="3">Eq. 2</th><th>b</th><td>0.886</td><td>0.818</td><td>0.642</td><td>0.901</td><td>0.327</td><td>0.216</td><td>0.213</td><td>0.800</td>
+<tr><th>r4</th><td>0.390</td><td>0.844</td><td>0.903</td><td>0.903</td><td>0.629</td><td>0.086</td><td>0.355</td><td>0.436</td>
 </tr>
-<tr><th style="display:none"></th><th>se</th><td>(0.397)</td><td>(0.317)</td><td>(0.162)</td><td>(0.217)</td><td>(0.472)</td><td>(0.092)</td><td>(0.359)</td><td>(0.983)</td>
+<tr><th>r5</th><td>(0.798)</td><td>(0.922)</td><td>(0.350)</td><td>(0.678)</td><td>(0.357)</td><td>(0.554)</td><td>(0.840)</td><td>(0.313)</td>
 </tr>
-<tr><th style="display:none"></th><th>N</th><td>6,000</td><td>12,000</td><td>18,000</td><td>24,000</td><td>30,000</td><td>36,000</td><td>42,000</td><td>48,000</td>
+<tr><th>r6</th><td>6,000</td><td>12,000</td><td>18,000</td><td>24,000</td><td>30,000</td><td>36,000</td><td>42,000</td><td>48,000</td>
 </tr>
 </tbody></table>
 <span class="legend">My table note</span>
