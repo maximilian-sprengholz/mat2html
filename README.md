@@ -15,7 +15,7 @@ This Stata code...
 ```Stata
 // example matrix
 mat M = matuniform(6,8)
-forvalues c=1/8
+forvalues c=1/8 {
    foreach r in 3 6 {
      mat M[`r',`c']=`c'*`r'*1000 // example N
   }
