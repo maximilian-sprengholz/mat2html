@@ -43,7 +43,7 @@ quietly {
 	*        PREP/ERRORS        *
 	*---------------------------*
 	***	file management
-		if ("`using'"=="") | (strpos("`using'", "/")==0 | strpos("`using'", "\")==0)  {
+		if ("`using'"=="") | (strpos("`using'", "/")==0 & strpos("`using'", "\")==0)  {
 		*	add cd path if nothing or only filename specified
 			local using "`c(pwd)'/mat2html_`M'.html"
 		}
