@@ -44,7 +44,7 @@ quietly {
 	*---------------------------*
 	***	file management
 		if ("`using'"=="") | (strpos("`using'", "/")==0 & strpos("`using'", "\")==0)  {
-		*	add cd path if nothing or only filename specified
+		*	add cd path if nothing/only filename specified
 			local using "`c(pwd)'/mat2html_`M'.html"
 		}
 		if "`append'"=="" {
