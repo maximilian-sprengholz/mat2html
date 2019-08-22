@@ -51,11 +51,11 @@ quietly {
 			local append "replace"
 		}
 	***	process input matrix
-		mat `M'_temp = `M'
+		mat M_temp = `M'
 	*	rows added?
 		if "`addrows'"!="" {
-			local r = rowsof(`M'_temp)
-			local c = colsof(`M'_temp)
+			local r = rowsof(M_temp)
+			local c = colsof(M_temp)
 			local cnt 0
 		*	check if within logical bounds
 			foreach addr of numlist `addrows' {
@@ -80,20 +80,20 @@ quietly {
 					local m_pt_b = `prev'+1
 				*	split part
 					if `addr'!=0 {
-						mat `M'_temp_pt_`addr' = `M'_temp[`m_pt_b'..`addr', 1...]
+						mat M_temp_pt_`addr' = M_temp[`m_pt_b'..`addr', 1...]
 					}
 				*	additional row
-					mat `M'_temp_add_`addr' = J(1,`c',.) // col-wise procedure
+					mat M_temp_add_`addr' = J(1,`c',.) // col-wise procedure
 				}
 			*	additional rows added
 				else {
-					mat `M'_temp_add_`addr' = `M'_temp_add_`addr' \ J(1,`c',.) // interlace rows
+					mat M_temp_add_`addr' = M_temp_add_`addr' \ J(1,`c',.) // interlace rows
 				}
 			*	if no rows added after last original row: save last split part
 				local aopts : word count `addrows'
 				if (`cnt'==`aopts') & (`addr'<`r') {
 					local m_end_b = `addr'+1
-					mat `M'_temp_end = `M'_temp[`m_end_b'..`r', 1...]
+					mat M_temp_end = M_temp[`m_end_b'..`r', 1...]
 				}
 			}
 		*	merge together (as additional loop to keep col/rownumers intact
@@ -110,30 +110,30 @@ quietly {
 			*	first rowset
 				if `cnt'==1 {
 					if `addr'!=0 {
-						mat `M'_temp_temp = `M'_temp_pt_`addr' \ `M'_temp_add_`addr'
+						mat M_temp_temp = M_temp_pt_`addr' \ M_temp_add_`addr'
 					}
 					else {
-						mat `M'_temp_temp = `M'_temp_add_`addr'
+						mat M_temp_temp = M_temp_add_`addr'
 					}
 				}
 			*	add rows
 				else if ("`prev'"!="`addr'") {
-					mat `M'_temp_temp = `M'_temp_temp \ `M'_temp_pt_`addr' \ `M'_temp_add_`addr'
+					mat M_temp_temp = M_temp_temp \ M_temp_pt_`addr' \ M_temp_add_`addr'
 				}
 			*	add last rows of matrix (if not added)
 				if (`cnt'==`aopts') & (`addr'<`r') {
-					mat `M'_temp_temp = `M'_temp_temp \ `M'_temp_end
+					mat M_temp_temp = M_temp_temp \ M_temp_end
 				}
 			}
-			mat `M'_temp = `M'_temp_temp
+			mat M_temp = M_temp_temp
 		}
 	*	cols added?
 		if `"`rowtwolabels'"'!="" {
 			local addcols = "0 `addcols'" // add row to the left to add labeling column
 		}
 		if "`addcols'"!="" {
-			local r = rowsof(`M'_temp)
-			local c = colsof(`M'_temp)
+			local r = rowsof(M_temp)
+			local c = colsof(M_temp)
 			local cnt 0
 		*	check if within logical bounds
 			foreach addc of numlist `addcols' {
@@ -158,20 +158,20 @@ quietly {
 					local m_pt_b = `prev'+1
 				*	split part
 					if `addc'!=0 {
-						mat `M'_temp_pt_`addc' = `M'_temp[1...,`m_pt_b'..`addc']
+						mat M_temp_pt_`addc' = M_temp[1...,`m_pt_b'..`addc']
 					}
 				*	additional col
-					mat `M'_temp_add_`addc' = J(`r',1,.) // col-wise procedure
+					mat M_temp_add_`addc' = J(`r',1,.) // col-wise procedure
 				}
 			*	additional columns added
 				else {
-					mat `M'_temp_add_`addc' = `M'_temp_add_`addc' , J(`r',1,.) // interlace columns
+					mat M_temp_add_`addc' = M_temp_add_`addc' , J(`r',1,.) // interlace columns
 				}
 			*	if no colums added after last original column: save last split part
 				local aopts : word count `addcols'
 				if (`cnt'==`aopts') & (`addc'<`c') {
 					local m_end_b = `addc'+1
-					mat `M'_temp_end = `M'_temp[1...,`m_end_b'..`c']
+					mat M_temp_end = M_temp[1...,`m_end_b'..`c']
 				}
 			}
 		*	merge together (as additional loop to keep col/rownumers intact
@@ -188,28 +188,28 @@ quietly {
 			*	first colset
 				if `cnt'==1 {
 					if `addc'!=0 {
-						mat `M'_temp_temp = `M'_temp_pt_`addc' , `M'_temp_add_`addc'
+						mat M_temp_temp = M_temp_pt_`addc' , M_temp_add_`addc'
 					}
 					else {
-						mat `M'_temp_temp = `M'_temp_add_`addc'
+						mat M_temp_temp = M_temp_add_`addc'
 					}
 				}
 			*	add columns
 				else if ("`prev'"!="`addc'") {
-					mat `M'_temp_temp = `M'_temp_temp, `M'_temp_pt_`addc' , `M'_temp_add_`addc'
+					mat M_temp_temp = M_temp_temp, M_temp_pt_`addc' , M_temp_add_`addc'
 				}
 			*	add last cols of matrix (if not added)
 				if (`cnt'==`aopts') & (`addc'<`c') {
-					mat `M'_temp_temp = `M'_temp_temp, `M'_temp_end
+					mat M_temp_temp = M_temp_temp, M_temp_end
 				}
 			}
-			mat `M'_temp = `M'_temp_temp
+			mat M_temp = M_temp_temp
 		}
 	*	update row/col numbers and names
-		local r = rowsof(`M'_temp)
-		local c = colsof(`M'_temp)
-		local coln: colnames `M'_temp, quoted
-		local rown: rownames `M'_temp, quoted
+		local r = rowsof(M_temp)
+		local c = colsof(M_temp)
+		local coln: colnames M_temp, quoted
+		local rown: rownames M_temp, quoted
 	***	format (set fparse)
 	*	if not specified
 		if "`format'"=="" {
@@ -537,7 +537,7 @@ quietly {
 				else {
 				*	cell value
 					capture {
-						local value : display `cellformat' `M'_temp[`i',`j']
+						local value : display `cellformat' M_temp[`i',`j']
 						local value = strtrim("`value'") // remove blanks
 					*	omit dot for empty cells
 						if "`value'"=="." {
@@ -588,7 +588,7 @@ quietly {
 		}
 		if _rc {
 			noisily dis as error `"File "`using'" could not be completed."' ///
-				_newline "This is a generic error. Try:" ///
+				_newline "This is a generic error:" ///
 				_newline "- Ensure you have writing permissions in the specified directory" ///
 				_newline "- Use a different filenname and/or directory" ///
 				_newline "- Restart Stata"
