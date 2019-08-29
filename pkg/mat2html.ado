@@ -3,10 +3,8 @@
 *   mat2html –––
 *   Matrix to HTML table conversion
 *
-*   Author:   Maximilian Sprengholz
-*   					maximilian.sprengholz@hu-berlin.de
-*   Version:  0.9
-*   Date:     Jun 2019
+*   Author:		Maximilian Sprengholz
+*   			maximilian.sprengholz@hu-berlin.de
 *
 ********************************************************************************
 
@@ -635,7 +633,7 @@ quietly {
 		if `"`note'"'!="" {
 			file write mat2html_file _n `"<span class="legend">`note'</span>"' _n
 		}
-	*** user input to put after table
+	***	user input to put after table
 		if `"`posttable'"'!="" {
 			file write mat2html_file _n `"`posttable'"' _n
 		}
