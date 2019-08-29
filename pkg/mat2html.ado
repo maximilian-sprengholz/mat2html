@@ -291,7 +291,7 @@ quietly {
 		if `"`rowlabels'"'!="" {
 			local rlbls `"`rowlabels'"'
 			local rlblcnt : word count `rlbls'
-		*	if labellist shall be repeated, repeat given labels until col end
+		*	if labellist shall be repeated, repeat given labels until row end
 			if "`repeatlabels'"!="" & `rlblcnt'<`r' {
 				local rlblno = `rlblcnt'
 				while `rlblcnt'<`r' {
@@ -316,7 +316,7 @@ quietly {
 		if `"`rowtwolabels'"'!="" {
 			local rtwolbls `"`rowtwolabels'"'
 			local rlblcnt : word count `rtwolbls'
-		*	if labellist shall be repeated, repeat given labels until col end
+		*	if labellist shall be repeated, repeat given labels until row end
 			if "`repeatlabels'"!="" & `rlblcnt'<`r' {
 				local rlblno = `rlblcnt'
 				while `rlblcnt'<`r' {
