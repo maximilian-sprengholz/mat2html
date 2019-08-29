@@ -21,19 +21,16 @@ forvalues c=1/8 {
   }
 }
 
-// set labels/parentheses
-forvalues i=1/2 {
-  local rlabels = `" `rlabels' "b" "se" "N" "' // use double quotes within compound double quotes!
-}
+// export HTML table
+
 local rowno = rowsof(M)
 
-// export HTML table
 mat2html M using "mytable.html", ///
     f(rowm, flist(3 %9.0gc) panel (3)) /// every third row (N) formatted as %9.0gc
-    par(par, rows(2(3)`rowno')) /// enclose every second row (se) in parentheses
-    rowl(`r2labels') /// add row labels
+    par(par, rows(2(3)6)) /// enclose every second row (se) in the 3-row panel in parentheses
+    rowl("b" "se" "N") /// add row labels
     coll("Model 1" "Model 2" "Model 3" "Model 4") colspan(2) /// add first set of col labels
-    coltwol("Subpop1" "Subpop2" "Subpop1" "Subpop2" "Subpop1" "Subpop2" "Subpop1" "Subpop2") /// 2nd set
+    coltwol("Subpop1" "Subpop2") rep /// 2nd set
     class(my-example-class) /// you can see the class when looking at the HTML code
     note("My table note")
 ```
@@ -73,7 +70,7 @@ There are several possibilities to combine written text and Stata output within 
 
 //  Using webdoc:
 webdoc append "mytable.html"
-```    
+```
 
 Personally, I prefer to write Markdown/HTML and Stata code within editors like Atom providing syntax highlighting for multiple languages within a single file. You could, for example, use the package [markdown-preview-enhanced](https://github.com/shd101wyy/markdown-preview-enhanced) within Atom to include your HTML files at any place in the document, adding it to the DOM via:
 
@@ -85,4 +82,3 @@ Personally, I prefer to write Markdown/HTML and Stata code within editors like A
 Maximilian Sprengholz<br />
 Humboldt-Universität zu Berlin<br />
 [maximilian.sprengholz@hu-berlin.de](mailto:maximilian.sprengholz@hu-berlin.de)
-

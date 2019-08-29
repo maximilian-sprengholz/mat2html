@@ -35,6 +35,7 @@ working directory under "mat2html_{it:name}".
 {p2col:{cmd:COLLabels(}{it:string}{cmd:)}}First set of column labels{p_end}
 {p2col:{cmd:ROWTWOLabels(}{it:string}{cmd:)}}Second set of row labels{p_end}
 {p2col:{cmd:COLTWOLabels(}{it:string}{cmd:)}}Second set of column labels{p_end}
+{p2col:{cmd:REPeatlabels(}{it:string}{cmd:)}}Repeat provided labels until last row/column{p_end}
 {p2col:{cmd:ROWSpan(}{it:int}{cmd:)}}Rows to be spanned by first set of row labels{p_end}
 {p2col:{cmd:COLSpan(}{it:int}{cmd:)}}Columns to be spanned by first set of column labels{p_end}
 {p2col:{cmd:ROWTWOSpan(}{it:int}{cmd:)}}Rows to be spanned by second set of row labels{p_end}
@@ -144,8 +145,8 @@ A 4x4 matrix with a single row for column labels and a single column for row lab
 labeled by typing:
 
 {p 8 8 2}
-{cmd:rowl(}"Rowlabel 1" "Rowlabel 2" "Rowlabel 3" "Rowlabel4"{cmd:)}, /// {break}
-{cmd:coll(}"Collabel 1" "Collabel 2" "Collabel 3" "Collabel4"{cmd:)}
+{cmd:rowl(}"Rowlabel 1" "Rowlabel 2" "Rowlabel 3" "Rowlabel 4"{cmd:)}, /// {break}
+{cmd:coll(}"Collabel 1" "Collabel 2" "Collabel 3" "Collabel 4"{cmd:)}
 
 {p 8 8 2}
 If you additionally used the {cmd: addrows} or {cmd: addcols} option, you would need to alter
@@ -163,7 +164,21 @@ where the column labels of the first row span two columns each, you could type:
 
 {p 8 8 2}
 {cmd:coll(}"Collabel spanning two cols 1" "Collabel spanning two cols 1"{cmd:)}, {cmd:colspan(}2{cmd:)} /// {break}
-{cmd:coltwol(}"Subcollabel 1" "Subcollabel 2" "Subcollabel 3" "Subcollabel4"{cmd:)}
+{cmd:coltwol(}"Subcollabel 1" "Subcollabel 2" "Subcollabel 3" "Subcollabel 4"{cmd:)}
+
+{p 4 8 2}
+{cmd:REPeatlabels} will repeat all first and second labels for rows and columns
+until the last row/column is reached. This is useful, for example, when your
+second level labels are all the same within one first level label. The following
+commands would therefore have the same result:
+
+{p 8 8 2}
+{cmd:coll(}"Collabel spanning two cols 1" "Collabel spanning two cols 1"{cmd:)}, {cmd:colspan(}2{cmd:)} /// {break}
+{cmd:coltwol(}"Subcollabel 1" "Subcollabel 2" "Subcollabel 1" "Subcollabel 2"{cmd:)}
+
+{p 8 8 2}
+{cmd:coll(}"Collabel spanning two cols 1" "Collabel spanning two cols 1"{cmd:)}, {cmd:colspan(}2{cmd:)} /// {break}
+{cmd:coltwol(}"Subcollabel 1" "Subcollabel 2"{cmd:) rep}
 
 {p 4 8 2}
 {cmd:ADDRows(}{it:numlist}{cmd:)} and {cmd:ADDCols(}{it:numlist}{cmd:)} allow to

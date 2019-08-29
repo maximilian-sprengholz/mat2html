@@ -24,6 +24,7 @@ program mat2html
 			COLLabels(str asis) ///
 			ROWTWOLabels(str asis) ///
 			COLTWOLabels(str asis) ///
+			REPeatlabels ///
 			ROWSpan(integer -1) ///
 			COLSpan(integer -1) ///
 			ROWTWOSpan(integer -1) ///
@@ -43,9 +44,13 @@ quietly {
 	*        PREP/ERRORS        *
 	*---------------------------*
 	***	file management
-		if ("`using'"=="") | (strpos("`using'", "/")==0 & strpos("`using'", "\")==0)  {
+		if ("`using'"=="")  {
 		*	add cd path if nothing/only filename specified
 			local using "`c(pwd)'/mat2html_`M'.html"
+		}
+		else if (strpos("`using'", "/")==0 & strpos("`using'", "\")==0)  {
+		*	add cd path if nothing/only filename specified
+			local using "`c(pwd)'/`using'"
 		}
 		if "`append'"=="" {
 			local append "replace"
@@ -284,8 +289,21 @@ quietly {
 		}
 	***	labels
 		if `"`rowlabels'"'!="" {
-			local cnt 0
 			local rlbls `"`rowlabels'"'
+			local rlblcnt : word count `rlbls'
+		*	if labellist shall be repeated, repeat given labels until col end
+			if "`repeatlabels'"!="" & `rlblcnt'<`r' {
+				local rlblno = `rlblcnt'
+				while `rlblcnt'<`r' {
+					forvalues l=1/`rlblno' {
+						local rlbl : word `l' of `rlbls'
+						local rlbls `"`rlbls' "`rlbl'""'
+						local rlblcnt : word count `rlbls'
+					}
+				}
+			}
+		*	extract all labels
+			local cnt 0
 			while strpos(`"`rlbls'"', char(34))!=0 {
 				local rlblb 	= strpos(`"`rlbls'"', char(34)) // collabel begin
 				local rlbls 	= subinstr(`"`rlbls'"', char(34),"", 1) // delete first double quotes
@@ -296,8 +314,21 @@ quietly {
 			}
 		}
 		if `"`rowtwolabels'"'!="" {
-			local cnt 0
 			local rtwolbls `"`rowtwolabels'"'
+			local rlblcnt : word count `rtwolbls'
+		*	if labellist shall be repeated, repeat given labels until col end
+			if "`repeatlabels'"!="" & `rlblcnt'<`r' {
+				local rlblno = `rlblcnt'
+				while `rlblcnt'<`r' {
+					forvalues l=1/`rlblno' {
+						local rlbl : word `l' of `rtwolbls'
+						local rtwolbls `"`rtwolbls' "`rlbl'""'
+						local rlblcnt : word count `rtwolbls'
+					}
+				}
+			}
+		*	extract all labels
+			local cnt 0
 			while strpos(`"`rtwolbls'"', char(34))!=0 {
 				local rtwolblb 	= strpos(`"`rtwolbls'"', char(34)) // collabel begin
 				local rtwolbls 	= subinstr(`"`rtwolbls'"', char(34),"", 1) // delete first double quotes
@@ -308,8 +339,21 @@ quietly {
 			}
 		}
 		if `"`collabels'"'!="" {
-			local cnt 0
 			local clbls `"`collabels'"'
+			local clblcnt : word count `clbls'
+		*	if labellist shall be repeated, repeat given labels until col end
+			if "`repeatlabels'"!="" & `clblcnt'<`c' {
+				local clblno = `clblcnt'
+				while `clblcnt'<`c' {
+					forvalues l=1/`clblno' {
+						local clbl : word `l' of `clbls'
+						local clbls `"`clbls' "`clbl'""'
+						local clblcnt : word count `clbls'
+					}
+				}
+			}
+		*	extract all labels
+			local cnt 0
 			while strpos(`"`clbls'"', char(34))!=0 {
 				local clblb 	= strpos(`"`clbls'"', char(34)) // clbl begin
 				local clbls 	= subinstr(`"`clbls'"', char(34),"", 1) // delete first double quotes
@@ -320,8 +364,21 @@ quietly {
 			}
 		}
 		if `"`coltwolabels'"'!="" {
-			local cnt 0
 			local ctwolbls `"`coltwolabels'"'
+			local clblcnt : word count `ctwolbls'
+		*	if labellist shall be repeated, repeat given labels until col end
+			if "`repeatlabels'"!="" & `clblcnt'<`c' {
+				local clblno = `clblcnt'
+				while `clblcnt'<`c' {
+					forvalues l=1/`clblno' {
+						local clbl : word `l' of `ctwolbls'
+						local ctwolbls `"`ctwolbls' "`clbl'""'
+						local clblcnt : word count `ctwolbls'
+					}
+				}
+			}
+		*	extract all labels
+			local cnt 0
 			while strpos(`"`ctwolbls'"', char(34))!=0 {
 				local ctwolblb 	= strpos(`"`ctwolbls'"', char(34)) // ctwolbl begin
 				local ctwolbls 	= subinstr(`"`ctwolbls'"', char(34),"", 1) // delete first double quotes
@@ -640,3 +697,15 @@ end
 			exit
 		}
 	end
+
+
+
+mat M = matuniform(6,8)
+mat2html M using "mytable.html", ///
+    f(rowm, flist(3 %9.0gc) panel (3)) /// every third row (N) formatted as %9.0gc
+    par(par, rows(2(3)6)) /// enclose every second row (se) in the 3-row panel in parentheses
+    rowl("b" "se" "N") /// add row labels
+    coll("Model 1" "Model 2" "Model 3" "Model 4") colspan(2) /// add first set of col labels
+    coltwol("Subpop1" "Subpop2") rep /// 2nd set
+    class(my-example-class) /// you can see the class when looking at the HTML code
+    note("My table note")
