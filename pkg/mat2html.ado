@@ -635,7 +635,7 @@ quietly {
 		if `"`note'"'!="" {
 			file write mat2html_file _n `"<span class="legend">`note'</span>"' _n
 		}
-	*** user input to put before table
+	*** user input to put after table
 		if `"`posttable'"'!="" {
 			file write mat2html_file _n `"`posttable'"' _n
 		}
@@ -697,15 +697,3 @@ end
 			exit
 		}
 	end
-
-
-
-mat M = matuniform(6,8)
-mat2html M using "mytable.html", ///
-    f(rowm, flist(3 %9.0gc) panel (3)) /// every third row (N) formatted as %9.0gc
-    par(par, rows(2(3)6)) /// enclose every second row (se) in the 3-row panel in parentheses
-    rowl("b" "se" "N") /// add row labels
-    coll("Model 1" "Model 2" "Model 3" "Model 4") colspan(2) /// add first set of col labels
-    coltwol("Subpop1" "Subpop2") rep /// 2nd set
-    class(my-example-class) /// you can see the class when looking at the HTML code
-    note("My table note")
